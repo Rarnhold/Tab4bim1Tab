@@ -9,9 +9,7 @@ Criar uma PoC de um sistema de vendas em Java. ok!
 
 Cadastro de cliente: Id, nome, telefone, endereço, cidade, estado (enum), email, gênero (enum). OK!
 
-Cadastro de usuário:
-
-Id, id de cliente e senha.
+Cadastro de usuário: Id, id de cliente e senha. 
 
 Todo usuário é um cliente, mas ele possui uma senha. Logo para se ter um usuário deve-se cadastrar um cliente antes e referenciá-lo no cadastro de usuários.
 
