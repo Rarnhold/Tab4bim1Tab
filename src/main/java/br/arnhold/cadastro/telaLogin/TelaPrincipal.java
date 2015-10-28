@@ -7,12 +7,16 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
+import javax.swing.JTabbedPane;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaPrincipal extends JFrame {
 
 	private JPanel contentPane;
+	private JTabbedPane tabbedPane;
 
 	/**
 	 * Launch the application.
@@ -40,42 +44,37 @@ public class TelaPrincipal extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		JMenu mnNewMenu = new JMenu("Cadastro");
-		menuBar.add(mnNewMenu);
+		JMenu mnCadastro = new JMenu("Cadastro");
+		menuBar.add(mnCadastro);
 		
 		JMenuItem mntmCliente = new JMenuItem("Cliente");
-		mnNewMenu.add(mntmCliente);
-		
-		JMenuItem mntmVendedor = new JMenuItem("Vendedor");
-		mnNewMenu.add(mntmVendedor);
-		
-		JMenuItem mntmProduto = new JMenuItem("Produto");
-		mnNewMenu.add(mntmProduto);
-		
-		JMenu mnDigitao = new JMenu("Vendas");
-		menuBar.add(mnDigitao);
-		
-		JMenuItem mntmVendas = new JMenuItem("Vendas");
-		mnDigitao.add(mntmVendas);
-		
-		JMenu mnNewMenu_1 = new JMenu("Relat\u00F3rio");
-		menuBar.add(mnNewMenu_1);
-		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Venda Por Dia");
-		mnNewMenu_1.add(mntmNewMenuItem);
-		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Venda Por M\u00EAs");
-		mnNewMenu_1.add(mntmNewMenuItem_1);
-		
-		JMenuItem mntmVendaPorCategoria = new JMenuItem("Venda Por Categoria Produto");
-		mnNewMenu_1.add(mntmVendaPorCategoria);
-		
-		JMenuItem mntmVendaPorCliente = new JMenuItem("Venda Por Cliente");
-		mnNewMenu_1.add(mntmVendaPorCliente);
-		contentPane = new JPanel();
+		mntmCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AbrirCliente();
+			}
+		});
+		mnCadastro.add(mntmCliente);
+		JPanel jPanel = new JPanel();
+		contentPane = jPanel;
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
+		
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		contentPane.add(tabbedPane, BorderLayout.CENTER);
+	}
+
+	protected void AbrirCliente() {
+		final TelaCadastroCliente telaCadastroCliente = new TelaCadastroCliente();
+		
+		ActionListener act = new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.remove(telaCadastroCliente);
+				
+			}
+		};
+		tabbedPane.addTab("Cadastro de Cliente", telaCadastroCliente);
 	}
 
 }

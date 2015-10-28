@@ -10,7 +10,13 @@ import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 
-public class AbstractPanel extends JPanel {
+//Insere o abstract para que possa reutilizar a tela em outras telas
+public abstract class AbstractPanel extends JPanel {
+	
+	
+	//instancia o método abstrado desta forma quem for utilizar deverá implementar para a utilização.
+	protected abstract void configuraMiolo();
+	
 
 	/**
 	 * Create the panel.
@@ -52,6 +58,9 @@ public class AbstractPanel extends JPanel {
 		gbc_btnGravar.gridy = 0;
 		panel_Inferior.add(btnGravar, gbc_btnGravar);
 
+		//Tem que existir a chamada do método
+		configuraMiolo();
+		
 	}
 
 }
