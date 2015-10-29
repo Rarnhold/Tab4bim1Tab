@@ -25,8 +25,8 @@ public class ConexaoPostgres {
 		}
 	}
 
-	/* teste da Conexão com o banco de dados 
-	 * public static void main(String[] args) {
+	// teste da Conexão com o banco de dados 
+	/*  public static void main(String[] args) {
 		ConexaoPostgres c = new ConexaoPostgres();
 	}*/
 

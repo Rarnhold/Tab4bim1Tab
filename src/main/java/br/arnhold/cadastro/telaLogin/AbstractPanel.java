@@ -9,6 +9,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 //Insere o abstract para que possa reutilizar a tela em outras telas
 public abstract class AbstractPanel extends JPanel {
@@ -50,13 +52,6 @@ public abstract class AbstractPanel extends JPanel {
 		gbl_panel_Inferior.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
 		gbl_panel_Inferior.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		panel_Inferior.setLayout(gbl_panel_Inferior);
-		
-		JButton btnGravar = new JButton("Gravar");
-		GridBagConstraints gbc_btnGravar = new GridBagConstraints();
-		gbc_btnGravar.anchor = GridBagConstraints.NORTHEAST;
-		gbc_btnGravar.gridx = 1;
-		gbc_btnGravar.gridy = 0;
-		panel_Inferior.add(btnGravar, gbc_btnGravar);
 
 		//Tem que existir a chamada do método
 		configuraMiolo();

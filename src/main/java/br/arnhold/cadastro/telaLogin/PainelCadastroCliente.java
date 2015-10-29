@@ -1,12 +1,31 @@
 package br.arnhold.cadastro.telaLogin;
 
 import javax.swing.JPanel;
+
 import java.awt.GridBagLayout;
+
 import javax.swing.JTextField;
+
 import java.awt.GridBagConstraints;
+
 import javax.swing.JLabel;
+
 import java.awt.Insets;
+import java.util.ArrayList;
+
 import javax.swing.JComboBox;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
+import br.arnhold.cadastro.model.Cliente;
+import br.arnhold.cadastro.model.ClienteDaoPostgres;
+
+import javax.swing.JButton;
+
+import org.eclipse.jdt.internal.compiler.ast.Clinit;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PainelCadastroCliente extends JPanel {
 	private JTextField txtId;
@@ -22,6 +41,15 @@ public class PainelCadastroCliente extends JPanel {
 	private JLabel lblEstado;
 	private JLabel lblEmail;
 	private JLabel lblGnero;
+	private JScrollPane scrollPane;
+	private JTable table;
+	//chamada da tela de impressão inferior da tela de cadastro
+		private TabelaCliente model = new TabelaCliente();
+	// verifica se existe contato selecionado
+	private Cliente contatoSelecionado;
+	
+	
+	private JButton btnGravar;
 
 	/**
 	 * Create the panel.
@@ -31,7 +59,9 @@ public class PainelCadastroCliente extends JPanel {
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		
+		
 		setLayout(gridBagLayout);
 		
 		JLabel lblId = new JLabel("ID");
@@ -171,7 +201,48 @@ public class PainelCadastroCliente extends JPanel {
 		gbc_cbxGenero.gridx = 1;
 		gbc_cbxGenero.gridy = 7;
 		add(cbxGenero, gbc_cbxGenero);
+		
+		btnGravar = new JButton("Gravar");
+		btnGravar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SalvaCliente();
+			}
+		});
+		GridBagConstraints gbc_btnGravar = new GridBagConstraints();
+		gbc_btnGravar.insets = new Insets(0, 0, 5, 0);
+		gbc_btnGravar.gridx = 3;
+		gbc_btnGravar.gridy = 7;
+		add(btnGravar, gbc_btnGravar);
+		
+		scrollPane = new JScrollPane();
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.gridwidth = 4;
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridx = 0;
+		gbc_scrollPane.gridy = 8;
+		add(scrollPane, gbc_scrollPane);
+		
+		table = new JTable(model);
+		scrollPane.setViewportView(table);
 
+	}
+
+	protected void SalvaCliente() {
+		if (contatoSelecionado == null) {
+			Cliente c = new Cliente();
+			c.setId(Integer.parseInt(txtId.getText().trim()));
+			
+			
+			//grava no banco
+			/*ClienteDaoPostgres dao = new ClienteDaoPostgres();
+			dao.inserir(c);
+			*/
+			//Grava na tabela
+			
+			
+			
+		}
+		
 	}
 
 }
