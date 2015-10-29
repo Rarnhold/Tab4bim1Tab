@@ -30,7 +30,7 @@ public class PainelCadastroCliente extends JPanel {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
@@ -166,7 +166,7 @@ public class PainelCadastroCliente extends JPanel {
 		
 		JComboBox cbxGenero = new JComboBox();
 		GridBagConstraints gbc_cbxGenero = new GridBagConstraints();
-		gbc_cbxGenero.anchor = GridBagConstraints.WEST;
+		gbc_cbxGenero.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cbxGenero.insets = new Insets(0, 0, 10, 5);
 		gbc_cbxGenero.gridx = 1;
 		gbc_cbxGenero.gridy = 7;
