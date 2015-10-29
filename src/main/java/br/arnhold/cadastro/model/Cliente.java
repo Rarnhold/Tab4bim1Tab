@@ -1,6 +1,6 @@
 package br.arnhold.cadastro.model;
 
-public class cliente {
+public class Cliente {
 
 	// Id, nome, telefone, endereço, cidade, estado (enum), email, gênero
 	// (enum).
@@ -9,9 +9,9 @@ public class cliente {
 	private String telefone;
 	private String endereco;
 	private String cidade;
-	private estado estado;
+	private Estado estado;
 	private String email;
-	private genero genero;
+	private Genero genero;
 
 	public int getId() {
 		return id;
@@ -53,11 +53,11 @@ public class cliente {
 		this.cidade = cidade;
 	}
 
-	public estado getEstado() {
+	public Estado getEstado() {
 		return estado;
 	}
 
-	public void setEstado(estado estado) {
+	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
 
@@ -69,11 +69,11 @@ public class cliente {
 		this.email = email;
 	}
 
-	public genero getGenero() {
+	public Genero getGenero() {
 		return genero;
 	}
 
-	public void setGenero(genero genero) {
+	public void setGenero(Genero genero) {
 		this.genero = genero;
 	}
 

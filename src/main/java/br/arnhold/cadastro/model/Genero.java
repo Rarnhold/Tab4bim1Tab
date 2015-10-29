@@ -1,6 +1,6 @@
 package br.arnhold.cadastro.model;
 
-public enum genero {
+public enum Genero {
 	
 	M("Masculino"),
 	F("Feminino");
@@ -11,7 +11,7 @@ public enum genero {
 		return nome;
 	}
 
-	private genero(String nome) {
+	private Genero(String nome) {
 		this.nome = nome;
 	}
 	

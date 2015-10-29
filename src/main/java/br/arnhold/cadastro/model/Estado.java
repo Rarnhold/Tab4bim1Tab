@@ -1,6 +1,6 @@
 package br.arnhold.cadastro.model;
 
-public enum estado {
+public enum Estado {
 
 	SC("Santa Catarina"),
 	RS("Rio Grande do sul"),
@@ -14,7 +14,7 @@ public enum estado {
 	
 	private String nome;
 
-	private estado(String nome) {
+	private Estado(String nome) {
 		this.nome = nome;
 	}
 
