@@ -13,12 +13,16 @@ import javax.swing.JLabel;
 import java.awt.Insets;
 import java.util.ArrayList;
 
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import br.arnhold.cadastro.model.Cliente;
 import br.arnhold.cadastro.model.ClienteDaoPostgres;
+import br.arnhold.cadastro.model.Estado;
+import br.arnhold.cadastro.model.Genero;
 
 import javax.swing.JButton;
 
@@ -43,10 +47,16 @@ public class PainelCadastroCliente extends JPanel {
 	private JLabel lblGnero;
 	private JScrollPane scrollPane;
 	private JTable table;
+	private JComboBox cbxEstado;
+	private JComboBox cbxGenero;
+	
 	//chamada da tela de impressão inferior da tela de cadastro
-		private TabelaCliente model = new TabelaCliente();
+	private TabelaCliente model = new TabelaCliente();
+	
 	// verifica se existe contato selecionado
 	private Cliente contatoSelecionado;
+	
+	private TabelaCliente tabelaCliente = new TabelaCliente();
 	
 	
 	private JButton btnGravar;
@@ -73,7 +83,7 @@ public class PainelCadastroCliente extends JPanel {
 		
 		txtId = new JTextField();
 		GridBagConstraints gbc_txtId = new GridBagConstraints();
-		gbc_txtId.anchor = GridBagConstraints.WEST;
+		gbc_txtId.fill = GridBagConstraints.BOTH;
 		gbc_txtId.insets = new Insets(0, 0, 5, 5);
 		gbc_txtId.gridx = 1;
 		gbc_txtId.gridy = 1;
@@ -159,7 +169,7 @@ public class PainelCadastroCliente extends JPanel {
 		gbc_lblEstado.gridy = 5;
 		add(lblEstado, gbc_lblEstado);
 		
-		JComboBox cbxEstado = new JComboBox();
+		cbxEstado = new JComboBox();
 		GridBagConstraints gbc_cbxEstado = new GridBagConstraints();
 		gbc_cbxEstado.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cbxEstado.insets = new Insets(0, 0, 5, 0);
@@ -194,7 +204,7 @@ public class PainelCadastroCliente extends JPanel {
 		gbc_lblGnero.gridy = 7;
 		add(lblGnero, gbc_lblGnero);
 		
-		JComboBox cbxGenero = new JComboBox();
+		cbxGenero = new JComboBox();
 		GridBagConstraints gbc_cbxGenero = new GridBagConstraints();
 		gbc_cbxGenero.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cbxGenero.insets = new Insets(0, 0, 10, 5);
@@ -225,24 +235,46 @@ public class PainelCadastroCliente extends JPanel {
 		table = new JTable(model);
 		scrollPane.setViewportView(table);
 
+		carregaEnumCbxEstado();
+		
+		
+	}
+
+private void carregaEnumCbxEstado() {
+		Estado[] vetEstado = Estado.values();
+		ComboBoxModel cbx = new DefaultComboBoxModel(vetEstado);
+		cbxEstado.setModel(cbx);
+		
 	}
 
 	protected void SalvaCliente() {
 		if (contatoSelecionado == null) {
 			Cliente c = new Cliente();
 			c.setId(Integer.parseInt(txtId.getText().trim()));
+			c.setNome(txtNome.getText().trim());
+			c.setTelefone(txtTelefone.getText().trim());
+			c.setEndereco(txtEndereco.getText().trim());
+			c.setCidade(txtCidade.getText().trim());
+			c.setEstado((Estado) cbxEstado.getSelectedItem());
+			c.setEmail(txtEmail.getText().trim());
+			c.setGenero((Genero) cbxGenero.getSelectedItem());
 			
 			
 			//grava no banco
-			/*ClienteDaoPostgres dao = new ClienteDaoPostgres();
-			dao.inserir(c);
+			/*
+			 * ClienteDaoPostgres dao = new ClienteDaoPostgres();
+				dao.inserir(c);
 			*/
 			//Grava na tabela
+			model.addCLiente(c);
 			
 			
 			
 		}
 		
 	}
+
+
+	
 
 }

@@ -27,6 +27,8 @@ public class TelaPrincipal extends JFrame {
 				try {
 					TelaPrincipal frame = new TelaPrincipal();
 					frame.setVisible(true);
+					//inicia a tela maximizada
+					frame.setExtendedState(MAXIMIZED_BOTH);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
