@@ -236,7 +236,15 @@ public class PainelCadastroCliente extends JPanel {
 		scrollPane.setViewportView(table);
 
 		carregaEnumCbxEstado();
+		carregaEnumCbxGenero();
 		
+		
+	}
+
+private void carregaEnumCbxGenero() {
+		Genero[] vetGenero = Genero.values();
+		ComboBoxModel cbx = new DefaultComboBoxModel(vetGenero);
+		cbxGenero.setModel(cbx);
 		
 	}
 
