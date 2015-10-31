@@ -1,6 +1,7 @@
 package br.arnhold.cadastro.telaLogin;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
@@ -10,6 +11,16 @@ public class TabelaCliente extends AbstractTableModel {
 
 	private ArrayList<Cliente> lista = new ArrayList<Cliente>();
 
+	
+
+	public ArrayList<Cliente> getLista() {
+		return lista;
+	}
+
+	public void setLista(List<Cliente> lista) {
+		this.lista = (ArrayList<Cliente>) lista;
+		this.fireTableDataChanged();//atualiza modelo
+	}
 
 	public int getColumnCount() {
 		// TODO Auto-generated method stub
