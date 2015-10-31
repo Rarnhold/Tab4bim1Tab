@@ -31,9 +31,13 @@ import org.eclipse.jdt.internal.compiler.ast.Clinit;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PainelCadastroCliente extends JPanel {
 	private JTextField txtId;
@@ -106,8 +110,22 @@ public class PainelCadastroCliente extends JPanel {
 		cbxGenero = new JComboBox();
 
 		scrollPane = new JScrollPane();
-
+	
 		table = new JTable(model);
+		
+		
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			//carrega contat nos edit
+			public void mouseClicked(MouseEvent arg0) {
+				if (arg0.getClickCount() == 2) {
+					carregaContato(model.getLista().get(table.getSelectedRow()));
+					
+				}
+			}
+		});
+		
+		
 		scrollPane.setViewportView(table);
 
 		JButton btnGravar = new JButton("Gravar");
@@ -229,6 +247,20 @@ public class PainelCadastroCliente extends JPanel {
 
 	}
 
+	protected void carregaContato(Cliente c) {
+		txtId.setText(Integer.toString(c.getId()));
+		txtNome.setText(c.getNome());
+		txtTelefone.setText(c.getTelefone());
+		txtEndereco.setText(c.getEndereco());
+		txtCidade.setText(c.getCidade());
+		cbxEstado.setSelectedItem(c.getEstado());
+		txtEmail.setText(c.getEmail());
+		cbxGenero.setSelectedItem(c.getGenero());
+		
+		contatoSelecionado = c;
+		
+	}
+
 	private void atualizaTabela() {
 		ConexaoPostgres con = new ConexaoPostgres();
 		model.setLista((ArrayList<Cliente>)con.listaContatos());
@@ -250,11 +282,16 @@ public class PainelCadastroCliente extends JPanel {
 
 			ConexaoPostgres con = new ConexaoPostgres();
 			con.cadastraCliente(c);
-
-			// Grava na tabela
-			model.addCLiente(c);
-
+			atualizaTabela();
+			cancelaTransacao();
+		}else{
+			contatoSelecionado.setNome(txtNome.getText().trim());
 		}
+		
+	}
+
+	private void cancelaTransacao() {
+		// TODO Auto-generated method stub
 		
 	}
 
