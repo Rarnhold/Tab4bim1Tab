@@ -78,7 +78,7 @@ public class ConexaoPostgres {
 	}
 
 	public List<Cliente> listaContatos() {
-		String sql = "select * from treccliente";
+		String sql = "select * from treccliente order by 1 ";
 		List<Cliente> listaClientes = new ArrayList<Cliente>();
 		PreparedStatement pst;
 		try {
