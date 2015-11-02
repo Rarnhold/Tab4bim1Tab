@@ -11,6 +11,7 @@ import java.awt.GridBagConstraints;
 import javax.swing.JLabel;
 
 import java.awt.Insets;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -63,14 +64,9 @@ public class PainelCadastroCliente extends JPanel {
 	private TabelaCliente model = new TabelaCliente();
 
 	// verifica se existe contato selecionado
-	private Cliente contatoSelecionado;
+	private Cliente contatoSelecionado = null;
 
 	private TabelaCliente tabelaCliente = new TabelaCliente();
-
-	/**
-	 * Create the panel.
-	 *
-	 */
 
 	public PainelCadastroCliente() {
 
@@ -138,11 +134,16 @@ public class PainelCadastroCliente extends JPanel {
 		});
 
 		JButton btnDelete = new JButton("Delete");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				deletaCliente();
+			}
+		});
 
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				cancelaTransacao();
+				LimpaCamposTransacao();
 			}
 		});
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -267,9 +268,9 @@ public class PainelCadastroCliente extends JPanel {
 																				GroupLayout.PREFERRED_SIZE))
 														.addComponent(
 																scrollPane,
-																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
 																449,
-																GroupLayout.PREFERRED_SIZE))
+																Short.MAX_VALUE))
 										.addGap(1)));
 		groupLayout
 				.setVerticalGroup(groupLayout
@@ -410,13 +411,28 @@ public class PainelCadastroCliente extends JPanel {
 																btnCancelar))
 										.addGap(6)
 										.addComponent(scrollPane,
-												GroupLayout.PREFERRED_SIZE, 90,
-												GroupLayout.PREFERRED_SIZE)));
+												GroupLayout.DEFAULT_SIZE, 90,
+												Short.MAX_VALUE)));
 		setLayout(groupLayout);
-
+			
 		atualizaTabela();
 		carregaEnumCbxEstado();
 		carregaEnumCbxGenero();
+
+	}
+
+	protected void deletaCliente() {
+		if (contatoSelecionado == null) {
+			JOptionPane.showMessageDialog(null,
+					"Por favor Selecione um Cliente para ser Deletado");
+		} else {
+
+			ConexaoPostgres con = new ConexaoPostgres();
+			con.deletaCliente(contatoSelecionado);
+			atualizaTabela();
+			LimpaCamposTransacao();
+
+		}
 
 	}
 
@@ -438,10 +454,10 @@ public class PainelCadastroCliente extends JPanel {
 		ConexaoPostgres con = new ConexaoPostgres();
 		model.setLista((ArrayList<Cliente>) con.listaContatos());
 		model.fireTableDataChanged();
-
 		// atualiza o campo de id com o ultimo cliente + 1 para novo cadastro
 		txtId.setText(Integer.toString(con.ultimoCliente + 1));
-
+		txtNome.requestFocus();
+		
 	}
 
 	protected void gravarCliente() {
@@ -455,26 +471,31 @@ public class PainelCadastroCliente extends JPanel {
 			c.setEstado((Estado) cbxEstado.getSelectedItem());
 			c.setEmail(txtEmail.getText().trim());
 			c.setGenero((Genero) cbxGenero.getSelectedItem());
-			
+
 			ConexaoPostgres con = new ConexaoPostgres();
 			con.cadastraCliente(c);
 			atualizaTabela();
-			cancelaTransacao();
+			LimpaCamposTransacao();
+
 		} else {
 			contatoSelecionado.setNome(txtNome.getText().trim());
 			contatoSelecionado.setTelefone(txtTelefone.getText().trim());
 			contatoSelecionado.setEndereco(txtEndereco.getText().trim());
 			contatoSelecionado.setCidade(txtCidade.getText().trim());
-			contatoSelecionado.setEstado((Estado) (cbxEstado.getSelectedItem()));
+			contatoSelecionado
+					.setEstado((Estado) (cbxEstado.getSelectedItem()));
 			contatoSelecionado.setEmail(txtEmail.getText().trim());
-			contatoSelecionado.setGenero((Genero) (cbxGenero.getSelectedItem()));
+			contatoSelecionado
+					.setGenero((Genero) (cbxGenero.getSelectedItem()));
 			ConexaoPostgres con = new ConexaoPostgres();
 			con.updateCliente(contatoSelecionado);
 			atualizaTabela();
-			cancelaTransacao();
+			LimpaCamposTransacao();
+
 		}
 	}
-	private void cancelaTransacao() {
+
+	private void LimpaCamposTransacao() {
 		// LImpas todos os compos do formulario
 		txtId.setText(null);
 		txtNome.setText(null);
@@ -486,6 +507,7 @@ public class PainelCadastroCliente extends JPanel {
 		cbxGenero.setSelectedItem(null);
 		contatoSelecionado = null;
 		atualizaTabela();
+		
 
 	}
 

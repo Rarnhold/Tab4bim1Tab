@@ -9,8 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
+import javax.swing.text.html.HTMLDocument.HTMLReader.PreAction;
 
 import org.bouncycastle.jce.provider.JDKDSASigner.noneDSA;
+import org.eclipse.jdt.internal.compiler.lookup.IQualifiedTypeResolutionListener;
 
 public class ConexaoPostgres {
 
@@ -28,8 +30,8 @@ public class ConexaoPostgres {
 	private void abrirConexao() {
 		try {
 			conexao = DriverManager.getConnection(url, user, pass);
-	//		JOptionPane.showMessageDialog(null, "Conexão Estabelecida");
-	//		System.out.println("Conexão Estabelecida");
+			// JOptionPane.showMessageDialog(null, "Conexão Estabelecida");
+			// System.out.println("Conexão Estabelecida");
 		} catch (SQLException e) {
 			System.out.println("Erro de conexão com banco de dados! \n Nº: "
 					+ e);
@@ -42,15 +44,15 @@ public class ConexaoPostgres {
 			System.out.println("Conexão encerrada");
 		} catch (SQLException e) {
 			System.out
-			.println("Processo de encerramento com o banco apresentou falha:"
-					+ e);
+					.println("Processo de encerramento com o banco apresentou falha:"
+							+ e);
 		}
 	}
 
 	public void cadastraCliente(Cliente c) {
-		
+
 		String sql = "INSERT INTO TrecCliente (ID, NOME ,TELEFONE,ENDERECO,CIDADE,ESTADO,EMAIL,GENERO) VALUES (?, ?, ?, ?,?, ?, ?, ?)";
-		
+
 		try {
 			PreparedStatement pst = conexao.prepareStatement(sql);
 			pst.setInt(1, c.getId());
@@ -77,7 +79,8 @@ public class ConexaoPostgres {
 				e2.printStackTrace();
 				fecharConexao();
 			}
-			JOptionPane.showMessageDialog(null, ("Erro ao inserir Contato! \n ERRO: " + e));
+			JOptionPane.showMessageDialog(null,
+					("Erro ao inserir Contato! \n ERRO: " + e));
 		}
 
 	}
@@ -86,31 +89,32 @@ public class ConexaoPostgres {
 		String sql = "select * from treccliente order by 1 ";
 		List<Cliente> listaClientes = new ArrayList<Cliente>();
 		PreparedStatement pst;
+		
 		try {
 			pst = conexao.prepareStatement(sql);
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
 
 				Cliente c = new Cliente();
-				
+
 				c.setId(rs.getInt("ID"));
 				c.setNome(rs.getString("Nome"));
 				c.setTelefone(rs.getString("Telefone"));
 				c.setEndereco(rs.getString("Endereco"));
 				c.setCidade(rs.getString("Cidade"));
-		        //c.setEstado(rs.getString();
+				c.setEstado(Estado.valueOf(rs.getString("estado")));
 				c.setEmail(rs.getString("Email"));
-			  //c.setGenero(rs.getString("");
+			    c.setGenero(Genero.valueOf(rs.getString("genero")));
 				listaClientes.add(c);
-			    ultimoCliente = c.getId();				
+				ultimoCliente = c.getId();
 			}
 		} catch (SQLException e) {
 			try {
-				if (conexao != null){
+				if (conexao != null) {
 					conexao.rollback();
 				}
 			} catch (Exception e2) {
-				e2.printStackTrace();	
+				e2.printStackTrace();
 				fecharConexao();
 			}
 			e.printStackTrace();
@@ -134,20 +138,49 @@ public class ConexaoPostgres {
 			JOptionPane.showMessageDialog(null, "Atualizado com sucesso");
 			pst.close();
 			fecharConexao();
-		
+
 		} catch (SQLException e) {
 			try {
-				if (conexao != null){
+				if (conexao != null) {
 					conexao.rollback();
 				}
 			} catch (Exception e2) {
-				e2.printStackTrace();	
+				e2.printStackTrace();
 				fecharConexao();
 			}
-			System.out.println("Erro ao Atualizar o Contato! \n ERRO: " + e);
+			System.out.println("Erro ao Atualizar o Cliente! \n ERRO: " + e);
 			fecharConexao();
 		}
-		
+
+	}
+
+	public void deletaCliente(Cliente contatoSelecionado) {
+		String sql = "DELETE FROM treccliente where ID =?";
+		int resposta;
+		resposta = JOptionPane.showConfirmDialog(null,
+				"Deseja realmente deletar cliente");
+		if (resposta == JOptionPane.YES_OPTION) {
+			try {
+				PreparedStatement pst = conexao.prepareStatement(sql);
+				pst.setInt(1, contatoSelecionado.getId());
+				pst.executeUpdate();
+				JOptionPane.showMessageDialog(null, "Contato Deletado");
+				fecharConexao();
+			} catch (SQLException e) {
+				try {
+					if (conexao != null) {
+						conexao.rollback();
+					}
+				} catch (Exception e2) {
+					e2.printStackTrace();
+					fecharConexao();
+				}
+				System.out.println("Erro ao Deletar o Clinte! \n" + e);
+				fecharConexao();
+			}
+		}else{
+			
+		}
 	}
 
 }
