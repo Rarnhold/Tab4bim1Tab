@@ -10,6 +10,8 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import org.bouncycastle.jce.provider.JDKDSASigner.noneDSA;
+
 public class ConexaoPostgres {
 
 	private static Connection conexao;
@@ -46,9 +48,9 @@ public class ConexaoPostgres {
 	}
 
 	public void cadastraCliente(Cliente c) {
-		// String sql =
-		// "INSERT INTO TrecCliente (ID, NOME ,TELEFONE,ENDERECO,CIDADE,ESTADO,EMAIL,GENERO) VALUES (?, ?, ?, ?,?, ?, ?, ?)";
-		String sql = "INSERT INTO TrecCliente (ID, NOME ,TELEFONE,ENDERECO,CIDADE,EMAIL) VALUES (?,?,?,?,?,?)";
+		
+		String sql = "INSERT INTO TrecCliente (ID, NOME ,TELEFONE,ENDERECO,CIDADE,ESTADO,EMAIL,GENERO) VALUES (?, ?, ?, ?,?, ?, ?, ?)";
+		
 		try {
 			PreparedStatement pst = conexao.prepareStatement(sql);
 			pst.setInt(1, c.getId());
@@ -56,9 +58,9 @@ public class ConexaoPostgres {
 			pst.setString(3, c.getTelefone());
 			pst.setString(4, c.getEndereco());
 			pst.setString(5, c.getCidade());
-			// pst.setString(6, "1");
-			pst.setString(6, c.getEmail());
-			// pst.setString(8, "1");
+			pst.setString(6, c.getEstado().name());
+			pst.setString(7, c.getEmail());
+			pst.setString(8, c.getGenero().name());
 
 			// executa o sql
 			pst.executeUpdate();
@@ -75,7 +77,7 @@ public class ConexaoPostgres {
 				e2.printStackTrace();
 				fecharConexao();
 			}
-			System.out.println("Erro ao inserir Contato! \n ERRO: " + e);
+			JOptionPane.showMessageDialog(null, ("Erro ao inserir Contato! \n ERRO: " + e));
 		}
 
 	}
@@ -90,17 +92,17 @@ public class ConexaoPostgres {
 			while (rs.next()) {
 
 				Cliente c = new Cliente();
+				
 				c.setId(rs.getInt("ID"));
 				c.setNome(rs.getString("Nome"));
 				c.setTelefone(rs.getString("Telefone"));
 				c.setEndereco(rs.getString("Endereco"));
 				c.setCidade(rs.getString("Cidade"));
-		      //c.setEstado(rs.getString(columnLabel));
+		        //c.setEstado(rs.getString();
 				c.setEmail(rs.getString("Email"));
 			  //c.setGenero(rs.getString("");
 				listaClientes.add(c);
 			    ultimoCliente = c.getId();				
-				System.out.println(ultimoCliente);
 			}
 		} catch (SQLException e) {
 			try {
@@ -117,17 +119,16 @@ public class ConexaoPostgres {
 	}
 
 	public void updateCliente(Cliente contatoSelecionado) {
-		// TODO Auto-generated method stub
-		String sql = "UPDATE CONTATO SET NOME=? ,TELEFONE=?,ENDERECO=?,CIDADE=?,ESTADO=?,EMAIL=?,GENERO=? WHERE ID=?";
+		String sql = "UPDATE treccliente SET NOME=? ,TELEFONE=?,ENDERECO=?,CIDADE=?,ESTADO=?,EMAIL=?,GENERO=? WHERE ID=?";
 		try {
 			PreparedStatement pst = conexao.prepareStatement(sql);
 			pst.setString(1, contatoSelecionado.getNome());
 			pst.setString(2, contatoSelecionado.getTelefone());
 			pst.setString(3, contatoSelecionado.getEndereco());
 			pst.setString(4, contatoSelecionado.getCidade());
-			//pst.setString(5, contatoSelecionado.getEstado());
+			pst.setString(5, contatoSelecionado.getEstado().name());
 			pst.setString(6, contatoSelecionado.getEmail());
-			//pst.setString(7, contatoSelecionado.getGenero());
+			pst.setString(7, contatoSelecionado.getGenero().name());
 			pst.setInt(8, contatoSelecionado.getId());
 			pst.executeUpdate();
 			JOptionPane.showMessageDialog(null, "Atualizado com sucesso");
