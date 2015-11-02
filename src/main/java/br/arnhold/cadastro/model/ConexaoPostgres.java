@@ -16,6 +16,7 @@ public class ConexaoPostgres {
 	private static String url = "jdbc:postgresql://localhost:5432/BancoSmoke";
 	private static String user = "postgres";
 	private static String pass = "postgres";
+	public int ultimoCliente;
 
 	public ConexaoPostgres() {
 		abrirConexao();
@@ -25,8 +26,8 @@ public class ConexaoPostgres {
 	private void abrirConexao() {
 		try {
 			conexao = DriverManager.getConnection(url, user, pass);
-			JOptionPane.showMessageDialog(null, "Conexão Estabelecida");
-			System.out.println("Conexão Estabelecida");
+	//		JOptionPane.showMessageDialog(null, "Conexão Estabelecida");
+	//		System.out.println("Conexão Estabelecida");
 		} catch (SQLException e) {
 			System.out.println("Erro de conexão com banco de dados! \n Nº: "
 					+ e);
@@ -36,9 +37,11 @@ public class ConexaoPostgres {
 	private void fecharConexao() {
 		try {
 			conexao.close();
+			System.out.println("Conexão encerrada");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out
+			.println("Processo de encerramento com o banco apresentou falha:"
+					+ e);
 		}
 	}
 
@@ -85,6 +88,7 @@ public class ConexaoPostgres {
 			pst = conexao.prepareStatement(sql);
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
+
 				Cliente c = new Cliente();
 				c.setId(rs.getInt("ID"));
 				c.setNome(rs.getString("Nome"));
@@ -95,6 +99,8 @@ public class ConexaoPostgres {
 				c.setEmail(rs.getString("Email"));
 			  //c.setGenero(rs.getString("");
 				listaClientes.add(c);
+			    ultimoCliente = c.getId();				
+				System.out.println(ultimoCliente);
 			}
 		} catch (SQLException e) {
 			try {
@@ -108,6 +114,39 @@ public class ConexaoPostgres {
 			e.printStackTrace();
 		}
 		return listaClientes;
+	}
+
+	public void updateCliente(Cliente contatoSelecionado) {
+		// TODO Auto-generated method stub
+		String sql = "UPDATE CONTATO SET NOME=? ,TELEFONE=?,ENDERECO=?,CIDADE=?,ESTADO=?,EMAIL=?,GENERO=? WHERE ID=?";
+		try {
+			PreparedStatement pst = conexao.prepareStatement(sql);
+			pst.setString(1, contatoSelecionado.getNome());
+			pst.setString(2, contatoSelecionado.getTelefone());
+			pst.setString(3, contatoSelecionado.getEndereco());
+			pst.setString(4, contatoSelecionado.getCidade());
+			//pst.setString(5, contatoSelecionado.getEstado());
+			pst.setString(6, contatoSelecionado.getEmail());
+			//pst.setString(7, contatoSelecionado.getGenero());
+			pst.setInt(8, contatoSelecionado.getId());
+			pst.executeUpdate();
+			JOptionPane.showMessageDialog(null, "Atualizado com sucesso");
+			pst.close();
+			fecharConexao();
+		
+		} catch (SQLException e) {
+			try {
+				if (conexao != null){
+					conexao.rollback();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();	
+				fecharConexao();
+			}
+			System.out.println("Erro ao Atualizar o Contato! \n ERRO: " + e);
+			fecharConexao();
+		}
+		
 	}
 
 }
