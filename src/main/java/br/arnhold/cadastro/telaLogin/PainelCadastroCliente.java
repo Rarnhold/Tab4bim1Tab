@@ -136,6 +136,13 @@ public class PainelCadastroCliente extends JPanel {
 		});
 
 		JButton btnDelete = new JButton("Delete");
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				cancelaTransacao();
+			}
+		});
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -177,7 +184,9 @@ public class PainelCadastroCliente extends JPanel {
 					.addGap(5)
 					.addComponent(txtEmail, GroupLayout.PREFERRED_SIZE, 399, GroupLayout.PREFERRED_SIZE))
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(274)
+					.addGap(179)
+					.addComponent(btnCancelar)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnDelete, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
 					.addGap(6)
 					.addComponent(btnGravar, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE))
@@ -234,7 +243,9 @@ public class PainelCadastroCliente extends JPanel {
 						.addComponent(txtEmail, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(6)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnDelete)
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+							.addComponent(btnDelete)
+							.addComponent(btnCancelar))
 						.addComponent(btnGravar))
 					.addGap(6)
 					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE))
@@ -291,7 +302,18 @@ public class PainelCadastroCliente extends JPanel {
 	}
 
 	private void cancelaTransacao() {
-		// TODO Auto-generated method stub
+		// LImpas todos os compos do formulario
+		txtId.setText(null);
+		txtNome.setText(null);
+		txtTelefone.setText(null);
+		txtEndereco.setText(null);
+		txtCidade.setText(null);
+		cbxEstado.setSelectedItem(null);
+		txtEmail.setText(null);
+		cbxGenero.setSelectedItem(null);
+		contatoSelecionado = null;
+		
+		
 		
 	}
 
@@ -308,5 +330,4 @@ public class PainelCadastroCliente extends JPanel {
 		cbxEstado.setModel(cbx);
 
 	}
-
 }
