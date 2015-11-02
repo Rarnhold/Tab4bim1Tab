@@ -56,6 +56,14 @@ public class TelaPrincipal extends JFrame {
 			}
 		});
 		mnCadastro.add(mntmCliente);
+		
+		JMenuItem mntmUsuario = new JMenuItem("Usuario");
+		mntmUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				AbrirUsuario();
+			}
+		});
+		mnCadastro.add(mntmUsuario);
 		JPanel jPanel = new JPanel();
 		contentPane = jPanel;
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -66,6 +74,20 @@ public class TelaPrincipal extends JFrame {
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 	}
 
+	protected void AbrirUsuario() {
+		final TelaCadastroUsuario telaCadastroUsuario = new TelaCadastroUsuario();
+		
+		ActionListener act = new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				tabbedPane.remove(telaCadastroUsuario);
+			}
+		};
+		//chamada da tela
+		tabbedPane.addTab("Cadastro de Usuario", telaCadastroUsuario);
+	}
+
 	protected void AbrirCliente() {
 		final TelaCadastroCliente telaCadastroCliente = new TelaCadastroCliente();
 		
@@ -73,7 +95,6 @@ public class TelaPrincipal extends JFrame {
 			
 			public void actionPerformed(ActionEvent e) {
 				tabbedPane.remove(telaCadastroCliente);
-				
 			}
 		};
 		tabbedPane.addTab("Cadastro de Cliente", telaCadastroCliente);
