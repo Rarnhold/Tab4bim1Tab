@@ -1,15 +1,24 @@
 package br.arnhold.cadastro.telaLogin;
 
 import javax.swing.JPanel;
+
 import java.awt.GridBagLayout;
+
 import javax.swing.JLabel;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JTable;
+
+import br.arnhold.cadastro.model.Categoria;
+import br.arnhold.cadastro.model.Estado;
 
 public class PainelCadastroProduto extends JPanel {
 	private JTextField txtID;
@@ -18,6 +27,8 @@ public class PainelCadastroProduto extends JPanel {
 	private JTextField txtPreco;
 	private JTextField textField;
 	private JTable table;
+	private JComboBox cbxCategoria;
+	private JComboBox cbxUnidade;
 
 	/**
 	 * Create the panel.
@@ -90,7 +101,7 @@ public class PainelCadastroProduto extends JPanel {
 		gbc_lblNewLabel_3.gridy = 3;
 		add(lblNewLabel_3, gbc_lblNewLabel_3);
 		
-		JComboBox cbxCategoria = new JComboBox();
+		cbxCategoria = new JComboBox();
 		GridBagConstraints gbc_cbxCategoria = new GridBagConstraints();
 		gbc_cbxCategoria.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cbxCategoria.insets = new Insets(0, 0, 5, 5);
@@ -106,7 +117,7 @@ public class PainelCadastroProduto extends JPanel {
 		gbc_lblNewLabel_4.gridy = 3;
 		add(lblNewLabel_4, gbc_lblNewLabel_4);
 		
-		JComboBox cbxUnidade = new JComboBox();
+		cbxUnidade = new JComboBox();
 		GridBagConstraints gbc_cbxUnidade = new GridBagConstraints();
 		gbc_cbxUnidade.insets = new Insets(0, 0, 5, 0);
 		gbc_cbxUnidade.fill = GridBagConstraints.HORIZONTAL;
@@ -179,8 +190,16 @@ public class PainelCadastroProduto extends JPanel {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		
+		carregaEnumcbxCategoria();
 		
 
+	}
+
+	private void carregaEnumcbxCategoria() {
+		// TODO Auto-generated method stub
+		Categoria[] vetCategoria = Categoria.values();
+		ComboBoxModel cbx = new DefaultComboBoxModel(vetCategoria);
+		cbxCategoria.setModel(cbx);		
 	}
 
 }
