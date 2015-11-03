@@ -64,6 +64,14 @@ public class TelaPrincipal extends JFrame {
 			}
 		});
 		mnCadastro.add(mntmUsuario);
+		
+		JMenuItem mntmProduto = new JMenuItem("Produto");
+		mntmProduto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				AbrirProduto();
+			}
+		});
+		mnCadastro.add(mntmProduto);
 		JPanel jPanel = new JPanel();
 		contentPane = jPanel;
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -72,6 +80,19 @@ public class TelaPrincipal extends JFrame {
 		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
+	}
+
+	protected void AbrirProduto() {
+		final TelaCadastroProduto telaCadastroProduto = new TelaCadastroProduto();
+		
+		ActionListener act =  new ActionListener(){
+
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.remove(telaCadastroProduto);
+			}	
+		};
+		tabbedPane.add("Tela de Produto",telaCadastroProduto);
+		
 	}
 
 	protected void AbrirUsuario() {
