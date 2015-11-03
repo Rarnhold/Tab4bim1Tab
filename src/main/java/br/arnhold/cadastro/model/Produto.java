@@ -5,6 +5,10 @@ package br.arnhold.cadastro.model;
 public class Produto {
 	private int id;
 	private int codBarras;
+	private Categoria categoria;
+	private String descricao;
+	
+	
 	
 	
 	
