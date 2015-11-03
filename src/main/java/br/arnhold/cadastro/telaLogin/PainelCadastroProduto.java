@@ -1,173 +1,186 @@
 package br.arnhold.cadastro.telaLogin;
 
 import javax.swing.JPanel;
-import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.JTextField;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JButton;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JTable;
 
 public class PainelCadastroProduto extends JPanel {
+	private JTextField txtID;
+	private JTextField txtCodigoBarra;
+	private JTextField txtDescricao;
+	private JTextField txtPreco;
 	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField txtCusto;
-	private JTextField txtMargemLucro;
 	private JTable table;
 
 	/**
 	 * Create the panel.
 	 */
 	public PainelCadastroProduto() {
-		setLayout(new BorderLayout(0, 0));
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[]{0, 70, 0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		setLayout(gridBagLayout);
 		
-		JPanel panel_1 = new JPanel();
-		add(panel_1, BorderLayout.CENTER);
+		JLabel lblNewLabel_1 = new JLabel("ID:");
+		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+		gbc_lblNewLabel_1.anchor = GridBagConstraints.EAST;
+		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_1.gridx = 0;
+		gbc_lblNewLabel_1.gridy = 1;
+		add(lblNewLabel_1, gbc_lblNewLabel_1);
 		
-		JLabel lblId = new JLabel("ID:");
+		txtID = new JTextField();
+		GridBagConstraints gbc_txtID = new GridBagConstraints();
+		gbc_txtID.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtID.insets = new Insets(0, 0, 5, 5);
+		gbc_txtID.gridx = 1;
+		gbc_txtID.gridy = 1;
+		add(txtID, gbc_txtID);
+		txtID.setColumns(10);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
+		JLabel lblNewLabel_2 = new JLabel("C\u00F3digo Barra:");
+		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
+		gbc_lblNewLabel_2.anchor = GridBagConstraints.EAST;
+		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_2.gridx = 3;
+		gbc_lblNewLabel_2.gridy = 1;
+		add(lblNewLabel_2, gbc_lblNewLabel_2);
 		
-		JLabel lblCdigoDeBarras = new JLabel("C\u00F3digo de Barras:");
+		txtCodigoBarra = new JTextField();
+		GridBagConstraints gbc_txtCodigoBarra = new GridBagConstraints();
+		gbc_txtCodigoBarra.insets = new Insets(0, 0, 5, 0);
+		gbc_txtCodigoBarra.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtCodigoBarra.gridx = 4;
+		gbc_txtCodigoBarra.gridy = 1;
+		add(txtCodigoBarra, gbc_txtCodigoBarra);
+		txtCodigoBarra.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
+		JLabel Descrição = new JLabel("Descri\u00E7\u00E3o:");
+		GridBagConstraints gbc_Descrição = new GridBagConstraints();
+		gbc_Descrição.anchor = GridBagConstraints.EAST;
+		gbc_Descrição.insets = new Insets(0, 0, 5, 5);
+		gbc_Descrição.gridx = 0;
+		gbc_Descrição.gridy = 2;
+		add(Descrição, gbc_Descrição);
 		
-		JLabel lblDescrio = new JLabel("Descri\u00E7\u00E3o");
+		txtDescricao = new JTextField();
+		GridBagConstraints gbc_txtDescricao = new GridBagConstraints();
+		gbc_txtDescricao.gridwidth = 4;
+		gbc_txtDescricao.insets = new Insets(0, 0, 5, 0);
+		gbc_txtDescricao.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtDescricao.gridx = 1;
+		gbc_txtDescricao.gridy = 2;
+		add(txtDescricao, gbc_txtDescricao);
+		txtDescricao.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		
-		JLabel lblNewLabel = new JLabel("Categoria:");
+		JLabel lblNewLabel_3 = new JLabel("Categoria:");
+		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
+		gbc_lblNewLabel_3.anchor = GridBagConstraints.EAST;
+		gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_3.gridx = 0;
+		gbc_lblNewLabel_3.gridy = 3;
+		add(lblNewLabel_3, gbc_lblNewLabel_3);
 		
 		JComboBox cbxCategoria = new JComboBox();
+		GridBagConstraints gbc_cbxCategoria = new GridBagConstraints();
+		gbc_cbxCategoria.fill = GridBagConstraints.HORIZONTAL;
+		gbc_cbxCategoria.insets = new Insets(0, 0, 5, 5);
+		gbc_cbxCategoria.gridx = 1;
+		gbc_cbxCategoria.gridy = 3;
+		add(cbxCategoria, gbc_cbxCategoria);
 		
-		JLabel lblEmbalagem = new JLabel("Embalagem:");
+		JLabel lblNewLabel_4 = new JLabel("Unidade:");
+		GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
+		gbc_lblNewLabel_4.anchor = GridBagConstraints.EAST;
+		gbc_lblNewLabel_4.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_4.gridx = 3;
+		gbc_lblNewLabel_4.gridy = 3;
+		add(lblNewLabel_4, gbc_lblNewLabel_4);
 		
-		JComboBox cbxEmbalagem = new JComboBox();
+		JComboBox cbxUnidade = new JComboBox();
+		GridBagConstraints gbc_cbxUnidade = new GridBagConstraints();
+		gbc_cbxUnidade.insets = new Insets(0, 0, 5, 0);
+		gbc_cbxUnidade.fill = GridBagConstraints.HORIZONTAL;
+		gbc_cbxUnidade.gridx = 4;
+		gbc_cbxUnidade.gridy = 3;
+		add(cbxUnidade, gbc_cbxUnidade);
 		
-		JLabel lblCusto = new JLabel("Custo:");
+		JLabel lblNewLabel_5 = new JLabel("Pre\u00E7o:");
+		GridBagConstraints gbc_lblNewLabel_5 = new GridBagConstraints();
+		gbc_lblNewLabel_5.anchor = GridBagConstraints.EAST;
+		gbc_lblNewLabel_5.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_5.gridx = 0;
+		gbc_lblNewLabel_5.gridy = 4;
+		add(lblNewLabel_5, gbc_lblNewLabel_5);
 		
-		txtCusto = new JTextField();
-		txtCusto.setColumns(10);
+		txtPreco = new JTextField();
+		GridBagConstraints gbc_txtPreco = new GridBagConstraints();
+		gbc_txtPreco.insets = new Insets(0, 0, 5, 5);
+		gbc_txtPreco.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtPreco.gridx = 1;
+		gbc_txtPreco.gridy = 4;
+		add(txtPreco, gbc_txtPreco);
+		txtPreco.setColumns(10);
 		
-		JLabel lblMargemDeLucro = new JLabel("Margem de Lucro:");
+		JLabel lblNewLabel_6 = new JLabel("Margem Lucro");
+		GridBagConstraints gbc_lblNewLabel_6 = new GridBagConstraints();
+		gbc_lblNewLabel_6.anchor = GridBagConstraints.EAST;
+		gbc_lblNewLabel_6.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_6.gridx = 3;
+		gbc_lblNewLabel_6.gridy = 4;
+		add(lblNewLabel_6, gbc_lblNewLabel_6);
 		
-		txtMargemLucro = new JTextField();
-		txtMargemLucro.setColumns(10);
+		textField = new JTextField();
+		GridBagConstraints gbc_textField = new GridBagConstraints();
+		gbc_textField.insets = new Insets(0, 0, 5, 0);
+		gbc_textField.anchor = GridBagConstraints.NORTH;
+		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField.gridx = 4;
+		gbc_textField.gridy = 4;
+		add(textField, gbc_textField);
+		textField.setColumns(10);
 		
-		JButton btnNewButton_1 = new JButton("Delete");
+		JPanel panel = new JPanel();
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.anchor = GridBagConstraints.EAST;
+		gbc_panel.gridwidth = 5;
+		gbc_panel.insets = new Insets(0, 0, 5, 0);
+		gbc_panel.fill = GridBagConstraints.VERTICAL;
+		gbc_panel.gridx = 0;
+		gbc_panel.gridy = 5;
+		add(panel, gbc_panel);
 		
-		JButton btnNewButton = new JButton("Gravar");
+		JButton btnCancelar = new JButton("Cancelar");
+		panel.add(btnCancelar);
+		
+		JButton btnDeletar = new JButton("Deletar");
+		panel.add(btnDeletar);
+		
+		JButton btnGravar = new JButton("Gravar");
+		panel.add(btnGravar);
 		
 		JScrollPane scrollPane = new JScrollPane();
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.gridwidth = 5;
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridx = 0;
+		gbc_scrollPane.gridy = 6;
+		add(scrollPane, gbc_scrollPane);
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		
-		JButton btnCancelar = new JButton("Cancelar");
-		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(36)
-							.addComponent(lblId)
-							.addGap(5)
-							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
-							.addGap(8)
-							.addComponent(lblCdigoDeBarras)
-							.addGap(5)
-							.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(5)
-							.addComponent(lblDescrio)
-							.addGap(5)
-							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 393, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addComponent(lblNewLabel)
-							.addGap(5)
-							.addComponent(cbxCategoria, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
-							.addGap(36)
-							.addComponent(lblEmbalagem)
-							.addGap(5)
-							.addComponent(cbxEmbalagem, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(19)
-							.addComponent(lblCusto)
-							.addGap(5)
-							.addComponent(txtCusto, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
-							.addGap(8)
-							.addComponent(lblMargemDeLucro)
-							.addGap(5)
-							.addComponent(txtMargemLucro, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE))
-						.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
-							.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnCancelar, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE))
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 449, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
-		);
-		gl_panel_1.setVerticalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGap(30)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(3)
-							.addComponent(lblId))
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(3)
-							.addComponent(lblCdigoDeBarras))
-						.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(5)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(3)
-							.addComponent(lblDescrio))
-						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(5)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(3)
-							.addComponent(lblNewLabel))
-						.addComponent(cbxCategoria, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(3)
-							.addComponent(lblEmbalagem))
-						.addComponent(cbxEmbalagem, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(5)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(3)
-							.addComponent(lblCusto))
-						.addComponent(txtCusto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(3)
-							.addComponent(lblMargemDeLucro))
-						.addComponent(txtMargemLucro, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnNewButton)
-						.addComponent(btnNewButton_1)
-						.addComponent(btnCancelar))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE))
-		);
-		panel_1.setLayout(gl_panel_1);
+		
 
 	}
+
 }
