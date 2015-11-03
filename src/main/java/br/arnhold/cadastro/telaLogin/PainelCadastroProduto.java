@@ -19,6 +19,7 @@ import javax.swing.JTable;
 
 import br.arnhold.cadastro.model.Categoria;
 import br.arnhold.cadastro.model.Estado;
+import br.arnhold.cadastro.model.Unidade;
 
 public class PainelCadastroProduto extends JPanel {
 	private JTextField txtID;
@@ -191,8 +192,18 @@ public class PainelCadastroProduto extends JPanel {
 		scrollPane.setViewportView(table);
 		
 		carregaEnumcbxCategoria();
+		carregaEnumcbxUnidade();
 		
 
+	}
+
+	private void carregaEnumcbxUnidade() {
+		// TODO Auto-generated method stub
+		Unidade[] vetUnidade = Unidade.values();
+		ComboBoxModel cbx = new DefaultComboBoxModel(vetUnidade);
+		cbxUnidade.setModel(cbx);
+		
+		
 	}
 
 	private void carregaEnumcbxCategoria() {
