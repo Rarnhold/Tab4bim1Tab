@@ -143,7 +143,7 @@ public class PainelCadastroCliente extends JPanel {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				LimpaCamposTransacao();
+				limpaCamposTransacao();
 			}
 		});
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -273,7 +273,7 @@ public class PainelCadastroCliente extends JPanel {
 			ConexaoPostgres con = new ConexaoPostgres();
 			con.deletaCliente(contatoSelecionado);
 			atualizaTabela();
-			LimpaCamposTransacao();
+			limpaCamposTransacao();
 
 		}
 
@@ -318,7 +318,7 @@ public class PainelCadastroCliente extends JPanel {
 			ConexaoPostgres con = new ConexaoPostgres();
 			con.cadastraCliente(c);
 			atualizaTabela();
-			LimpaCamposTransacao();
+			limpaCamposTransacao();
 
 		} else {
 			contatoSelecionado.setNome(txtNome.getText().trim());
@@ -333,12 +333,12 @@ public class PainelCadastroCliente extends JPanel {
 			ConexaoPostgres con = new ConexaoPostgres();
 			con.updateCliente(contatoSelecionado);
 			atualizaTabela();
-			LimpaCamposTransacao();
+			limpaCamposTransacao();
 
 		}
 	}
 
-	private void LimpaCamposTransacao() {
+	private void limpaCamposTransacao() {
 		// LImpas todos os compos do formulario
 		txtId.setText(null);
 		txtNome.setText(null);

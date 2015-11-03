@@ -20,13 +20,15 @@ import javax.swing.JTable;
 import br.arnhold.cadastro.model.Categoria;
 import br.arnhold.cadastro.model.Estado;
 import br.arnhold.cadastro.model.Unidade;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PainelCadastroProduto extends JPanel {
 	private JTextField txtID;
 	private JTextField txtCodigoBarra;
 	private JTextField txtDescricao;
 	private JTextField txtPreco;
-	private JTextField textField;
+	private JTextField txtMargemLucro;
 	private JTable table;
 	private JComboBox cbxCategoria;
 	private JComboBox cbxUnidade;
@@ -151,15 +153,15 @@ public class PainelCadastroProduto extends JPanel {
 		gbc_lblNewLabel_6.gridy = 4;
 		add(lblNewLabel_6, gbc_lblNewLabel_6);
 		
-		textField = new JTextField();
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.insets = new Insets(0, 0, 5, 0);
-		gbc_textField.anchor = GridBagConstraints.NORTH;
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.gridx = 4;
-		gbc_textField.gridy = 4;
-		add(textField, gbc_textField);
-		textField.setColumns(10);
+		txtMargemLucro = new JTextField();
+		GridBagConstraints gbc_txtMargemLucro = new GridBagConstraints();
+		gbc_txtMargemLucro.insets = new Insets(0, 0, 5, 0);
+		gbc_txtMargemLucro.anchor = GridBagConstraints.NORTH;
+		gbc_txtMargemLucro.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtMargemLucro.gridx = 4;
+		gbc_txtMargemLucro.gridy = 4;
+		add(txtMargemLucro, gbc_txtMargemLucro);
+		txtMargemLucro.setColumns(10);
 		
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
@@ -172,6 +174,11 @@ public class PainelCadastroProduto extends JPanel {
 		add(panel, gbc_panel);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				limpaCamposTransacao();
+			}
+		});
 		panel.add(btnCancelar);
 		
 		JButton btnDeletar = new JButton("Deletar");
@@ -195,6 +202,18 @@ public class PainelCadastroProduto extends JPanel {
 		carregaEnumcbxUnidade();
 		
 
+	}
+
+	protected void limpaCamposTransacao() {
+		// TODO Auto-generated method stub
+		txtID.setText(null);
+		txtCodigoBarra.setText(null);
+		txtDescricao.setText(null);
+		cbxCategoria.setSelectedItem(null);
+		cbxUnidade.setSelectedItem(null);
+		txtPreco.setText(null);
+		txtMargemLucro.setText(null);
+		
 	}
 
 	private void carregaEnumcbxUnidade() {
