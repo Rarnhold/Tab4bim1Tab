@@ -6,9 +6,9 @@ import java.math.BigDecimal;
 
 public class Produto {
 	private int id;
+	private String descricao;
 	private int codBarras;
 	private Categoria categoria;
-	private String descricao;
 	private Unidade unidadeEmbalagem;
 	private BigDecimal custo;
 	private BigDecimal margemLucro;
