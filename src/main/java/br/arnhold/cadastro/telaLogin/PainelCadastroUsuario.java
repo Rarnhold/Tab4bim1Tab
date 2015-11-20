@@ -20,6 +20,8 @@ import org.springframework.ui.Model;
 
 import br.arnhold.cadastro.model.Cliente;
 import br.arnhold.cadastro.model.ConexaoPostgres;
+import br.arnhold.cadastro.model.Estado;
+import br.arnhold.cadastro.model.Genero;
 import br.arnhold.cadastro.model.Usuario;
 
 import java.awt.event.ActionListener;
@@ -149,8 +151,35 @@ public class PainelCadastroUsuario extends JPanel {
 		model.fireTableDataChanged();
 		
 		txtIdUsuario.setText(Integer.toString(con.ultimoUsuario + 1));
-		
-		
+	}
+	
+
+	private void gravaUsuario() {
+
+		if (UsuarioSelecionado == null) {
+			Usuario u = new Usuario();
+			u.setIdCliente(Integer.parseInt(txtIdCliente.getText().trim()));
+			u.setId(Integer.parseInt(txtIdUsuario.getText().trim()));
+			u.setSenha(Integer.parseInt(txtSenha.getText().trim()));
+
+			ConexaoPostgres con = new ConexaoPostgres();
+			con.cadastraUsuario(u);
+			atualizaTabela();
+			limpaCamposTransacao();
+
+		} else {
+			UsuarioSelecionado.setIdCliente(Integer.parseInt(txtIdCliente.getText().trim()));
+			UsuarioSelecionado.setId(Integer.parseInt(txtIdUsuario.getText().trim()));
+			UsuarioSelecionado.setSenha(Integer.parseInt(txtSenha.getText().trim()));
+			
+			ConexaoPostgres con = new ConexaoPostgres();
+			con.updateCliente(UsuarioSelecionado);
+			atualizaTabela();
+			limpaCamposTransacao();
+	}
+}
+
+	private void limpaCamposTransacao() {
 		
 		
 	}

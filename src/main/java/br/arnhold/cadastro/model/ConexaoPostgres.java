@@ -215,6 +215,11 @@ public class ConexaoPostgres {
 		}
 		return listaUsuario();
 	}
+
+	public void cadastraUsuario(Usuario u) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }
