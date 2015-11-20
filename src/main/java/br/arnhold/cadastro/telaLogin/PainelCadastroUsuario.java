@@ -1,24 +1,42 @@
 package br.arnhold.cadastro.telaLogin;
 
 import javax.swing.JPanel;
+
 import java.awt.BorderLayout;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
+
 import net.miginfocom.swing.MigLayout;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+
+import org.springframework.ui.Model;
+
+import br.arnhold.cadastro.model.Cliente;
+import br.arnhold.cadastro.model.ConexaoPostgres;
+import br.arnhold.cadastro.model.Usuario;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 public class PainelCadastroUsuario extends JPanel {
 	private JTextField txtIdUsuario;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField txtIdCliente;
+	private JTextField txtSenha;
 	private JTable table;
+	// chamada da tela de impressão inferior da tela de Usuario
+	private TabelaUsuario model = new TabelaUsuario();
+	
+	private Usuario UsuarioSelecionado = null;
+	//chamada da tela tabela de usauario
+	private TabelaUsuario tabelausuario = new TabelaUsuario();
 
 	/**
 	 * Create the panel.
@@ -36,11 +54,11 @@ public class PainelCadastroUsuario extends JPanel {
 		
 		JLabel lblCliente = new JLabel("Cliente:");
 		
-		textField = new JTextField();
-		textField.setColumns(10);
+		txtIdCliente = new JTextField();
+		txtIdCliente.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
+		txtSenha = new JTextField();
+		txtSenha.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Senha:");
 		
@@ -65,7 +83,7 @@ public class PainelCadastroUsuario extends JPanel {
 					.addGap(7)
 					.addComponent(lblNewLabel)
 					.addGap(28)
-					.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
+					.addComponent(txtSenha, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
 					.addGap(219))
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGap(232)
@@ -84,7 +102,7 @@ public class PainelCadastroUsuario extends JPanel {
 						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(lblCliente)
 							.addGap(25)
-							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))))
+							.addComponent(txtIdCliente, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))))
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGap(7)
 					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
@@ -102,7 +120,7 @@ public class PainelCadastroUsuario extends JPanel {
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGap(3)
 							.addComponent(lblCliente))
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(txtIdCliente, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGap(7)
@@ -114,12 +132,26 @@ public class PainelCadastroUsuario extends JPanel {
 								.addComponent(btnGravar)))
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGap(4)
-							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(txtSenha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 					.addGap(4)
 					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 187, GroupLayout.PREFERRED_SIZE)
 					.addGap(1))
 		);
 		panel.setLayout(gl_panel);
+		atualizaTabela();
+		System.out.println("saiu");
 
+	}
+
+	private void atualizaTabela() {
+		ConexaoPostgres con = new ConexaoPostgres();
+		model.setLista((ArrayList<Usuario>) con.listaUsuario());
+		model.fireTableDataChanged();
+		
+		txtIdUsuario.setText(Integer.toString(con.ultimoUsuario + 1));
+		
+		
+		
+		
 	}
 }

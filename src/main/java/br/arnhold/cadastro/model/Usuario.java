@@ -2,7 +2,7 @@ package br.arnhold.cadastro.model;
 
 public class Usuario extends Cliente {
 	private int id;
-	private Cliente idCliente;
+	private int idCliente;
 	private int senha;
 	
 	public int getId() {
@@ -11,11 +11,11 @@ public class Usuario extends Cliente {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Cliente getIdCliente() {
+	public int getIdCliente() {
 		return idCliente;
 	}
-	public void setIdCliente(Cliente idCliente) {
-		this.idCliente = idCliente;
+	public void setIdCliente(int i) {
+		this.idCliente = i;
 	}
 	public int getSenha() {
 		return senha;

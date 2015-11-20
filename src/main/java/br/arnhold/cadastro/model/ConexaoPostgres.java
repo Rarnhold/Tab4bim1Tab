@@ -21,6 +21,7 @@ public class ConexaoPostgres {
 	private static String user = "postgres";
 	private static String pass = "postgres";
 	public int ultimoCliente;
+	public int ultimoUsuario;
 
 	public ConexaoPostgres() {
 		abrirConexao();
@@ -89,7 +90,7 @@ public class ConexaoPostgres {
 		String sql = "select * from treccliente order by 1 ";
 		List<Cliente> listaClientes = new ArrayList<Cliente>();
 		PreparedStatement pst;
-		
+
 		try {
 			pst = conexao.prepareStatement(sql);
 			ResultSet rs = pst.executeQuery();
@@ -104,7 +105,7 @@ public class ConexaoPostgres {
 				c.setCidade(rs.getString("Cidade"));
 				c.setEstado(Estado.valueOf(rs.getString("estado")));
 				c.setEmail(rs.getString("Email"));
-			    c.setGenero(Genero.valueOf(rs.getString("genero")));
+				c.setGenero(Genero.valueOf(rs.getString("genero")));
 				listaClientes.add(c);
 				ultimoCliente = c.getId();
 			}
@@ -178,9 +179,42 @@ public class ConexaoPostgres {
 				System.out.println("Erro ao Deletar o Clinte! \n" + e);
 				fecharConexao();
 			}
-		}else{
-			
+		} else {
+
 		}
 	}
 
+	public ArrayList<Usuario> listaUsuario() {
+		String sql = "select * from tusuario order by 1 ";
+		List<Usuario> listaUsuarios = new ArrayList<Usuario>();
+		PreparedStatement pst;
+
+		try {
+			pst = conexao.prepareStatement(sql);
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+
+				Usuario u = new Usuario();
+
+				u.setIdCliente(rs.getInt("idcliente"));
+				u.setId(rs.getInt("id"));
+				u.setSenha(rs.getInt("senha"));
+				listaUsuarios.add(u);
+				ultimoUsuario = u.getId();
+			}
+		} catch (SQLException e) {
+			try {
+				if (conexao != null) {
+					conexao.rollback();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+				fecharConexao();
+			}
+			e.printStackTrace();
+		}
+		return listaUsuario();
+	}
+	
+	
 }

@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import br.arnhold.cadastro.model.Cliente;
 import br.arnhold.cadastro.model.Usuario;
 
 public class TabelaUsuario extends AbstractTableModel {
@@ -58,7 +57,7 @@ public class TabelaUsuario extends AbstractTableModel {
 		return super.getColumnName(coluna);
 	}
 
-	public void addCLiente(Usuario u) {
+	public void addUsuario(Usuario u) {
 		lista.add(u);
 		super.fireTableDataChanged();
 	}
