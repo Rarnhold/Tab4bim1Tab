@@ -152,11 +152,11 @@ public class PainelCadastroUsuario extends JPanel {
 	}
 
 	private void atualizaTabela() {
-		ConexaoPostgres con = new ConexaoPostgres();
+	/*	ConexaoPostgres con = new ConexaoPostgres();
 		model.setLista((ArrayList<Usuario>) con.listaUsuario());
 		model.fireTableDataChanged();
 		
-		txtIdUsuario.setText(Integer.toString(con.ultimoUsuario + 1));
+		txtIdUsuario.setText(Integer.toString(con.ultimoUsuario + 1));*/
 	}
 	
 
@@ -186,7 +186,10 @@ public class PainelCadastroUsuario extends JPanel {
 }
 
 	private void limpaCamposTransacao() {
-		
-		
+		txtIdCliente.setText("");
+		txtIdUsuario.setText("");
+		txtSenha.setText("");
+		UsuarioSelecionado = null;
+		atualizaTabela();
 	}
 }
