@@ -7,6 +7,7 @@ import java.awt.BorderLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
@@ -67,6 +68,11 @@ public class PainelCadastroUsuario extends JPanel {
 		JButton btnGravar = new JButton("Gravar");
 		btnGravar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				if (txtIdCliente.getText() == "") {
+					JOptionPane.showMessageDialog(null, "Não é possivel proceguir verifique as informações");
+					
+				}
+				gravarUsuario();
 			}
 		});
 		
@@ -140,7 +146,7 @@ public class PainelCadastroUsuario extends JPanel {
 					.addGap(1))
 		);
 		panel.setLayout(gl_panel);
-		atualizaTabela();
+//		atualizaTabela();
 		System.out.println("saiu");
 
 	}

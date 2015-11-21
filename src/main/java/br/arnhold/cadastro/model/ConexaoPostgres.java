@@ -217,7 +217,29 @@ public class ConexaoPostgres {
 	}
 
 	public void cadastraUsuario(Usuario u) {
-		// TODO Auto-generated method stub
+		String sql = "INSERT INTO tusuario(idcliente, id, senha) VALUES (?, ?, ?);";
+		try {
+			PreparedStatement pst = conexao.prepareStatement(sql);
+			pst.setInt(1, u.getIdCliente());
+			pst.setInt(2, u.getId());
+			pst.setInt(3, u.getSenha());
+			pst.executeUpdate();
+			
+			JOptionPane.showMessageDialog(null, "Salvo Com Sucesso");
+			pst.close();
+	
+		} catch (SQLException e) {
+			try {
+				if (conexao != null) {
+					conexao.rollback();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+				fecharConexao();
+			}
+			JOptionPane.showMessageDialog(null,
+					("Erro ao inserir Contato! \n ERRO: " + e));
+		}
 		
 	}
 
