@@ -232,20 +232,42 @@ public class ConexaoPostgres {
 			try {
 				if (conexao != null) {
 					conexao.rollback();
+					
 				}
 			} catch (Exception e2) {
+				JOptionPane.showMessageDialog(null, "Não pode haver mais de um usuario para o mesmo cliente");
 				e2.printStackTrace();
 				fecharConexao();
 			}
-			JOptionPane.showMessageDialog(null,
-					("Erro ao inserir Contato! \n ERRO: " + e));
+			System.out.println("Erro ao inserir Usuario! \n ERRO: " + e);
 		}
 		
 	}
 
 	public void updateUsuario(Usuario usuarioSelecionado) {
-		// TODO Auto-generated method stub
-		
+		String sql ="UPDATE tusuario SET idcliente=?, senha=? WHERE id=?;";
+		try {
+			PreparedStatement pst = conexao.prepareStatement(sql);
+			pst.setInt(1, usuarioSelecionado.getIdCliente());
+			pst.setInt(2, usuarioSelecionado.getSenha());
+			pst.setInt(3, usuarioSelecionado.getId());
+			
+			JOptionPane.showMessageDialog(null, "Atualizado com sucesso");
+			pst.close();
+			fecharConexao();
+		} catch (SQLException e) {
+			try {
+				if (conexao != null) {
+					conexao.rollback();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+				fecharConexao();
+			}
+			System.out.println("Erro ao Atualizar o Usuario! \n ERRO: " + e);
+			fecharConexao();
+		}
+
 	}
 	
 	
