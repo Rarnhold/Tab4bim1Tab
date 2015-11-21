@@ -220,6 +220,11 @@ public class ConexaoPostgres {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public void updateUsuario(Usuario usuarioSelecionado) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }

@@ -154,7 +154,7 @@ public class PainelCadastroUsuario extends JPanel {
 	}
 	
 
-	private void gravaUsuario() {
+	private void gravarUsuario() {
 
 		if (UsuarioSelecionado == null) {
 			Usuario u = new Usuario();
@@ -173,7 +173,7 @@ public class PainelCadastroUsuario extends JPanel {
 			UsuarioSelecionado.setSenha(Integer.parseInt(txtSenha.getText().trim()));
 			
 			ConexaoPostgres con = new ConexaoPostgres();
-			con.updateCliente(UsuarioSelecionado);
+			con.updateUsuario(UsuarioSelecionado);
 			atualizaTabela();
 			limpaCamposTransacao();
 	}
