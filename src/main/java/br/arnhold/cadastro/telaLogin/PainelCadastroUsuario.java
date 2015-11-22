@@ -77,6 +77,11 @@ public class PainelCadastroUsuario extends JPanel {
 		});
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				limpaCamposTransacao();
+			}
+		});
 		
 		JButton btnNewButton = new JButton("Delete");
 		
