@@ -269,6 +269,36 @@ public class ConexaoPostgres {
 		}
 
 	}
+
+	public void deletaUsuario(Usuario usuarioSelecionado) {
+		String sql ="";
+		int resposta;
+		resposta = JOptionPane.showConfirmDialog(null,
+				"Deseja realmente deletar Usuario");
+		if (resposta == JOptionPane.YES_OPTION) {
+			try {
+				PreparedStatement pst = conexao.prepareStatement(sql);
+				pst.setInt(1, usuarioSelecionado.getId());
+				pst.executeUpdate();
+				JOptionPane.showMessageDialog(null, "Usuario Deletado");
+				fecharConexao();
+			} catch (SQLException e) {
+				try {
+					if (conexao != null) {
+						conexao.rollback();
+					}
+				} catch (Exception e2) {
+					e2.printStackTrace();
+					fecharConexao();
+				}
+				System.out.println("Erro ao Deletar o usuario! \n" + e);
+				fecharConexao();
+			}
+		} else {
+
+		}
+		
+	}
 	
 	
 }

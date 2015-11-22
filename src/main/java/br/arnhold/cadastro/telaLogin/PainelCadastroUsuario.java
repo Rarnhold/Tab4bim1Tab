@@ -84,6 +84,11 @@ public class PainelCadastroUsuario extends JPanel {
 		});
 		
 		JButton btnNewButton = new JButton("Delete");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				deletaUsuario();
+			}
+		});
 		
 		JScrollPane scrollPane = new JScrollPane();
 		
@@ -154,6 +159,21 @@ public class PainelCadastroUsuario extends JPanel {
 //		atualizaTabela();
 		System.out.println("saiu");
 
+	}
+
+	protected void deletaUsuario() {
+		if (UsuarioSelecionado == null) {
+			JOptionPane.showMessageDialog(null,
+					"Por favor Selecione um Usuario para ser Deletado");
+		} else {
+
+			ConexaoPostgres con = new ConexaoPostgres();
+			con.deletaUsuario(UsuarioSelecionado);
+			atualizaTabela();
+			limpaCamposTransacao();
+
+		}
+		
 	}
 
 	private void atualizaTabela() {
