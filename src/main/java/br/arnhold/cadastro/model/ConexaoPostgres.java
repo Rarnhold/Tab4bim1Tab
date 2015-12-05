@@ -271,7 +271,7 @@ public class ConexaoPostgres {
 	}
 
 	public void deletaUsuario(Usuario usuarioSelecionado) {
-		String sql ="";
+		String sql ="DELETE FROM tusuario  WHERE id = ?";
 		int resposta;
 		resposta = JOptionPane.showConfirmDialog(null,
 				"Deseja realmente deletar Usuario");

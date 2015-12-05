@@ -34,6 +34,7 @@ public class PainelCadastroUsuario extends JPanel {
 	private JTextField txtIdCliente;
 	private JTextField txtSenha;
 	private JTable table;
+	
 	// chamada da tela de impressão inferior da tela de Usuario
 	private TabelaUsuario model = new TabelaUsuario();
 	
@@ -156,7 +157,7 @@ public class PainelCadastroUsuario extends JPanel {
 					.addGap(1))
 		);
 		panel.setLayout(gl_panel);
-//		atualizaTabela();
+		//atualizaTabela();
 		System.out.println("saiu");
 
 	}
@@ -177,11 +178,11 @@ public class PainelCadastroUsuario extends JPanel {
 	}
 
 	private void atualizaTabela() {
-	/*	ConexaoPostgres con = new ConexaoPostgres();
+		ConexaoPostgres con = new ConexaoPostgres();
 		model.setLista((ArrayList<Usuario>) con.listaUsuario());
 		model.fireTableDataChanged();
 		
-		txtIdUsuario.setText(Integer.toString(con.ultimoUsuario + 1));*/
+		txtIdUsuario.setText(Integer.toString(con.ultimoUsuario + 1));
 	}
 	
 

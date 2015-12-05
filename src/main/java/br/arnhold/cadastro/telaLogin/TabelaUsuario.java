@@ -22,7 +22,7 @@ public class TabelaUsuario extends AbstractTableModel {
 
 	public int getColumnCount() {
 		// TODO Auto-generated method stub
-		return 8;
+		return 3;
 	}
 
 	public int getRowCount() {

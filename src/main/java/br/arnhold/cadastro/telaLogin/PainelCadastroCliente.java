@@ -62,11 +62,12 @@ public class PainelCadastroCliente extends JPanel {
 
 	// chamada da tela de impressão inferior da tela de cadastro
 	private TabelaCliente model = new TabelaCliente();
-
+	private TabelaCliente tabelaCliente = new TabelaCliente();
+	
 	// verifica se existe contato selecionado
 	private Cliente contatoSelecionado = null;
 
-	private TabelaCliente tabelaCliente = new TabelaCliente();
+	
 
 	public PainelCadastroCliente() {
 
